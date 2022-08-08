@@ -24,11 +24,12 @@ yarn-error.log*
 .vercel
 
 node_modules
+yarn.lock
 
 ## Hardhat files ##
 packages/hardhat/*.txt
 packages/hardhat/cache
-packages/hardhat/artifacts
+packages/hardhat/artifacts/*
 packages/hardhat/deployments
 
 ## Frontend Files ##
@@ -40,4 +41,4 @@ packages/frontend/out/
 # production
 packages/frontend/build
 # contracts
-# packages/frontend/artifacts/*
+packages/frontend/artifacts/*
