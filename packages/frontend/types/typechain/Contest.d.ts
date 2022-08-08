@@ -24,6 +24,7 @@ interface ContestInterface extends ethers.utils.Interface {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
+    "hasVoted(address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "name()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
@@ -53,6 +54,7 @@ interface ContestInterface extends ethers.utils.Interface {
     functionFragment: "getApproved",
     values: [BigNumberish]
   ): string;
+  encodeFunctionData(functionFragment: "hasVoted", values: [string]): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
@@ -123,6 +125,7 @@ interface ContestInterface extends ethers.utils.Interface {
     functionFragment: "getApproved",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "hasVoted", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike
@@ -271,6 +274,8 @@ export class Contest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    hasVoted(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
+
     isApprovedForAll(
       owner: string,
       operator: string,
@@ -374,6 +379,8 @@ export class Contest extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  hasVoted(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
   isApprovedForAll(
     owner: string,
     operator: string,
@@ -460,6 +467,8 @@ export class Contest extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    hasVoted(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
     isApprovedForAll(
       owner: string,
@@ -638,6 +647,8 @@ export class Contest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    hasVoted(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
     isApprovedForAll(
       owner: string,
       operator: string,
@@ -735,6 +746,11 @@ export class Contest extends BaseContract {
 
     getApproved(
       tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    hasVoted(
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

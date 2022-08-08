@@ -20,8 +20,6 @@ export type { IERC165 } from "./IERC165";
 export type { Contest } from "./Contest";
 export type { IERC20Votes } from "./IERC20Votes";
 export type { JudgesToken } from "./JudgesToken";
-export type { Multicall } from "./Multicall";
-export type { YourContract } from "./YourContract";
 
 export { AccessControl__factory } from "./factories/AccessControl__factory";
 export { IAccessControl__factory } from "./factories/IAccessControl__factory";
@@ -42,5 +40,3 @@ export { IERC165__factory } from "./factories/IERC165__factory";
 export { Contest__factory } from "./factories/Contest__factory";
 export { IERC20Votes__factory } from "./factories/IERC20Votes__factory";
 export { JudgesToken__factory } from "./factories/JudgesToken__factory";
-export { Multicall__factory } from "./factories/Multicall__factory";
-export { YourContract__factory } from "./factories/YourContract__factory";

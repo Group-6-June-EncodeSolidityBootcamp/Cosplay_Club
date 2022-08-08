@@ -88,14 +88,6 @@ declare module "hardhat/types/runtime" {
       name: "JudgesToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.JudgesToken__factory>;
-    getContractFactory(
-      name: "Multicall",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Multicall__factory>;
-    getContractFactory(
-      name: "YourContract",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.YourContract__factory>;
 
     getContractAt(
       name: "AccessControl",
@@ -192,16 +184,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.JudgesToken>;
-    getContractAt(
-      name: "Multicall",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Multicall>;
-    getContractAt(
-      name: "YourContract",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.YourContract>;
 
     // default types
     getContractFactory(

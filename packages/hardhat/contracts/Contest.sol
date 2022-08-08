@@ -21,6 +21,7 @@ contract Contest is ERC721URIStorage {
 
     mapping(uint256 => uint256) public voteCount;
     mapping(address => uint256) public spentVotePower;
+    mapping(address => bool) public hasSubmitted;
 
     IERC20Votes public voteToken;
     uint256 public referenceBlock;
@@ -35,10 +36,11 @@ contract Contest is ERC721URIStorage {
         public
         returns (uint256)
     {
+        require(hasSubmitted[msg.sender] == false, "Only one submission allowed!");
         uint256 newItemId = _tokenIds.current();
         _mint(player, newItemId);
         _setTokenURI(newItemId, tokenURI);
-
+        hasSubmitted[msg.sender] = true;
         _tokenIds.increment();
         return newItemId;
     }
