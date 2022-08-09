@@ -27,6 +27,7 @@ interface ContestInterface extends ethers.utils.Interface {
     "getApproved(uint256)": FunctionFragment;
     "hasSubmitted(address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
+    "isSubmissionOpen()": FunctionFragment;
     "isVotingOpen()": FunctionFragment;
     "name()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -35,6 +36,7 @@ interface ContestInterface extends ethers.utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
+    "setIsSubmissionOpen(bool)": FunctionFragment;
     "setIsVotingOpen(bool)": FunctionFragment;
     "spentVotePower(address)": FunctionFragment;
     "submitItem(string)": FunctionFragment;
@@ -73,6 +75,10 @@ interface ContestInterface extends ethers.utils.Interface {
     values: [string, string]
   ): string;
   encodeFunctionData(
+    functionFragment: "isSubmissionOpen",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "isVotingOpen",
     values?: undefined
   ): string;
@@ -97,6 +103,10 @@ interface ContestInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "setApprovalForAll",
     values: [string, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setIsSubmissionOpen",
+    values: [boolean]
   ): string;
   encodeFunctionData(
     functionFragment: "setIsVotingOpen",
@@ -162,6 +172,10 @@ interface ContestInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "isSubmissionOpen",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "isVotingOpen",
     data: BytesLike
   ): Result;
@@ -182,6 +196,10 @@ interface ContestInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setApprovalForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setIsSubmissionOpen",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -341,6 +359,8 @@ export class Contest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    isSubmissionOpen(overrides?: CallOverrides): Promise<[boolean]>;
+
     isVotingOpen(overrides?: CallOverrides): Promise<[boolean]>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
@@ -376,6 +396,11 @@ export class Contest extends BaseContract {
     setApprovalForAll(
       operator: string,
       approved: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setIsSubmissionOpen(
+      _isSubmissionOpen: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -468,6 +493,8 @@ export class Contest extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  isSubmissionOpen(overrides?: CallOverrides): Promise<boolean>;
+
   isVotingOpen(overrides?: CallOverrides): Promise<boolean>;
 
   name(overrides?: CallOverrides): Promise<string>;
@@ -500,6 +527,11 @@ export class Contest extends BaseContract {
   setApprovalForAll(
     operator: string,
     approved: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setIsSubmissionOpen(
+    _isSubmissionOpen: boolean,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -576,6 +608,8 @@ export class Contest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    isSubmissionOpen(overrides?: CallOverrides): Promise<boolean>;
+
     isVotingOpen(overrides?: CallOverrides): Promise<boolean>;
 
     name(overrides?: CallOverrides): Promise<string>;
@@ -606,6 +640,11 @@ export class Contest extends BaseContract {
     setApprovalForAll(
       operator: string,
       approved: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setIsSubmissionOpen(
+      _isSubmissionOpen: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -788,6 +827,8 @@ export class Contest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    isSubmissionOpen(overrides?: CallOverrides): Promise<BigNumber>;
+
     isVotingOpen(overrides?: CallOverrides): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
@@ -823,6 +864,11 @@ export class Contest extends BaseContract {
     setApprovalForAll(
       operator: string,
       approved: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setIsSubmissionOpen(
+      _isSubmissionOpen: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -915,6 +961,8 @@ export class Contest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    isSubmissionOpen(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     isVotingOpen(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -950,6 +998,11 @@ export class Contest extends BaseContract {
     setApprovalForAll(
       operator: string,
       approved: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setIsSubmissionOpen(
+      _isSubmissionOpen: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
