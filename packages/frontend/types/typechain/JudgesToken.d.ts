@@ -45,6 +45,7 @@ interface JudgesTokenInterface extends ethers.utils.Interface {
     "nonces(address)": FunctionFragment;
     "numCheckpoints(address)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "quickTransferAccess(address)": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
@@ -145,6 +146,10 @@ interface JudgesTokenInterface extends ethers.utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "quickTransferAccess",
+    values: [string]
+  ): string;
+  encodeFunctionData(
     functionFragment: "renounceRole",
     values: [BytesLike, string]
   ): string;
@@ -227,6 +232,10 @@ interface JudgesTokenInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "quickTransferAccess",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "renounceRole",
     data: BytesLike
@@ -464,6 +473,11 @@ export class JudgesToken extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    quickTransferAccess(
+      to: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     renounceRole(
       role: BytesLike,
       account: string,
@@ -606,6 +620,11 @@ export class JudgesToken extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  quickTransferAccess(
+    to: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   renounceRole(
     role: BytesLike,
     account: string,
@@ -744,6 +763,8 @@ export class JudgesToken extends BaseContract {
       s: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    quickTransferAccess(to: string, overrides?: CallOverrides): Promise<void>;
 
     renounceRole(
       role: BytesLike,
@@ -1022,6 +1043,11 @@ export class JudgesToken extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    quickTransferAccess(
+      to: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     renounceRole(
       role: BytesLike,
       account: string,
@@ -1182,6 +1208,11 @@ export class JudgesToken extends BaseContract {
       v: BigNumberish,
       r: BytesLike,
       s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    quickTransferAccess(
+      to: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
