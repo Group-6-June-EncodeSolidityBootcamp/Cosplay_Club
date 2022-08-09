@@ -28,12 +28,19 @@ contract Contest is ERC721URIStorage, Ownable {
 
     IERC20Votes public voteToken;
     uint256 public referenceBlock;
+    bool public isSubmissionOpen;
     bool public isVotingOpen;
 
     constructor(address _voteToken) ERC721("ContestSubmission", "COS") {
         voteToken = IERC20Votes(_voteToken);
         referenceBlock = block.number;
+        isSubmissionOpen = true;
         isVotingOpen = true;
+    }
+
+    modifier submissionOpen () {
+        require(isSubmissionOpen, "Submission is Closed");
+        _;
     }
 
     modifier votingOpen () {
@@ -90,6 +97,11 @@ contract Contest is ERC721URIStorage, Ownable {
         votingPower_ =
             voteToken.getPastVotes(msg.sender, referenceBlock) -
             spentVotePower[msg.sender];
+    }
+
+    function setIsSubmissionOpen(bool _isSubmissionOpen) public onlyOwner {
+        require(_isSubmissionOpen != isSubmissionOpen, "No changes to make");
+        isSubmissionOpen = _isSubmissionOpen;
     }
 
     function setIsVotingOpen(bool _isVotingOpen) public onlyOwner {
