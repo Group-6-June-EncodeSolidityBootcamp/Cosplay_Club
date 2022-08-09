@@ -40,4 +40,12 @@ contract JudgesToken is ERC20, AccessControl, ERC20Permit, ERC20Votes {
     {
         super._burn(account, amount);
     }
+
+    // transfer admin and minter powers
+    function quickTransferAccess (address to) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        _grantRole(DEFAULT_ADMIN_ROLE, to);
+        _grantRole(MINTER_ROLE, to);
+        _revokeRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _revokeRole(MINTER_ROLE, msg.sender);
+    }
 }
