@@ -23,21 +23,27 @@ interface ContestInterface extends ethers.utils.Interface {
   functions: {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
+    "burnItem(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
-    "hasVoted(address)": FunctionFragment;
+    "hasSubmitted(address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
+    "isVotingOpen()": FunctionFragment;
     "name()": FunctionFragment;
+    "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "referenceBlock()": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
+    "setIsVotingOpen(bool)": FunctionFragment;
     "spentVotePower(address)": FunctionFragment;
-    "submitItem(address,string)": FunctionFragment;
+    "submitItem(string)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "tokenURI(uint256)": FunctionFragment;
     "totalSubmissions()": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
     "vote(uint256,uint256)": FunctionFragment;
     "voteCount(uint256)": FunctionFragment;
     "voteToken()": FunctionFragment;
@@ -51,21 +57,37 @@ interface ContestInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
   encodeFunctionData(
+    functionFragment: "burnItem",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "getApproved",
     values: [BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "hasVoted", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "hasSubmitted",
+    values: [string]
+  ): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "isVotingOpen",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "ownerOf",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "referenceBlock",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -77,13 +99,14 @@ interface ContestInterface extends ethers.utils.Interface {
     values: [string, boolean]
   ): string;
   encodeFunctionData(
+    functionFragment: "setIsVotingOpen",
+    values: [boolean]
+  ): string;
+  encodeFunctionData(
     functionFragment: "spentVotePower",
     values: [string]
   ): string;
-  encodeFunctionData(
-    functionFragment: "submitItem",
-    values: [string, string]
-  ): string;
+  encodeFunctionData(functionFragment: "submitItem", values: [string]): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [BytesLike]
@@ -100,6 +123,10 @@ interface ContestInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "transferFrom",
     values: [string, string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "vote",
@@ -121,19 +148,32 @@ interface ContestInterface extends ethers.utils.Interface {
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "burnItem", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getApproved",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "hasVoted", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "hasSubmitted",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "isVotingOpen",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "referenceBlock",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -142,6 +182,10 @@ interface ContestInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setApprovalForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setIsVotingOpen",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -163,6 +207,10 @@ interface ContestInterface extends ethers.utils.Interface {
     functionFragment: "transferFrom",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "vote", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "voteCount", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "voteToken", data: BytesLike): Result;
@@ -178,12 +226,14 @@ interface ContestInterface extends ethers.utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
     "Voted(address,uint256,uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Voted"): EventFragment;
 }
@@ -202,6 +252,10 @@ export type ApprovalForAllEvent = TypedEvent<
     operator: string;
     approved: boolean;
   }
+>;
+
+export type OwnershipTransferredEvent = TypedEvent<
+  [string, string] & { previousOwner: string; newOwner: string }
 >;
 
 export type TransferEvent = TypedEvent<
@@ -269,12 +323,17 @@ export class Contest extends BaseContract {
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    burnItem(
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    hasVoted(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
+    hasSubmitted(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
 
     isApprovedForAll(
       owner: string,
@@ -282,7 +341,11 @@ export class Contest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    isVotingOpen(overrides?: CallOverrides): Promise<[boolean]>;
+
     name(overrides?: CallOverrides): Promise<[string]>;
+
+    owner(overrides?: CallOverrides): Promise<[string]>;
 
     ownerOf(
       tokenId: BigNumberish,
@@ -290,6 +353,10 @@ export class Contest extends BaseContract {
     ): Promise<[string]>;
 
     referenceBlock(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    renounceOwnership(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -312,13 +379,17 @@ export class Contest extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    setIsVotingOpen(
+      _isVotingOpen: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     spentVotePower(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     submitItem(
-      player: string,
       tokenURI: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -341,6 +412,11 @@ export class Contest extends BaseContract {
       from: string,
       to: string,
       tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    transferOwnership(
+      newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -374,12 +450,17 @@ export class Contest extends BaseContract {
 
   balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+  burnItem(
+    tokenId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   getApproved(
     tokenId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
-  hasVoted(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+  hasSubmitted(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
   isApprovedForAll(
     owner: string,
@@ -387,11 +468,19 @@ export class Contest extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  isVotingOpen(overrides?: CallOverrides): Promise<boolean>;
+
   name(overrides?: CallOverrides): Promise<string>;
+
+  owner(overrides?: CallOverrides): Promise<string>;
 
   ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   referenceBlock(overrides?: CallOverrides): Promise<BigNumber>;
+
+  renounceOwnership(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   "safeTransferFrom(address,address,uint256)"(
     from: string,
@@ -414,10 +503,14 @@ export class Contest extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  setIsVotingOpen(
+    _isVotingOpen: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   spentVotePower(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   submitItem(
-    player: string,
     tokenURI: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -437,6 +530,11 @@ export class Contest extends BaseContract {
     from: string,
     to: string,
     tokenId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  transferOwnership(
+    newOwner: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -463,12 +561,14 @@ export class Contest extends BaseContract {
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    burnItem(tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    hasVoted(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+    hasSubmitted(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
     isApprovedForAll(
       owner: string,
@@ -476,11 +576,17 @@ export class Contest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    isVotingOpen(overrides?: CallOverrides): Promise<boolean>;
+
     name(overrides?: CallOverrides): Promise<string>;
+
+    owner(overrides?: CallOverrides): Promise<string>;
 
     ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     referenceBlock(overrides?: CallOverrides): Promise<BigNumber>;
+
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -503,13 +609,14 @@ export class Contest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setIsVotingOpen(
+      _isVotingOpen: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     spentVotePower(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    submitItem(
-      player: string,
-      tokenURI: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    submitItem(tokenURI: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     supportsInterface(
       interfaceId: BytesLike,
@@ -526,6 +633,11 @@ export class Contest extends BaseContract {
       from: string,
       to: string,
       tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    transferOwnership(
+      newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -582,6 +694,22 @@ export class Contest extends BaseContract {
     ): TypedEventFilter<
       [string, string, boolean],
       { owner: string; operator: string; approved: boolean }
+    >;
+
+    "OwnershipTransferred(address,address)"(
+      previousOwner?: string | null,
+      newOwner?: string | null
+    ): TypedEventFilter<
+      [string, string],
+      { previousOwner: string; newOwner: string }
+    >;
+
+    OwnershipTransferred(
+      previousOwner?: string | null,
+      newOwner?: string | null
+    ): TypedEventFilter<
+      [string, string],
+      { previousOwner: string; newOwner: string }
     >;
 
     "Transfer(address,address,uint256)"(
@@ -642,12 +770,17 @@ export class Contest extends BaseContract {
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    burnItem(
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    hasVoted(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    hasSubmitted(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     isApprovedForAll(
       owner: string,
@@ -655,7 +788,11 @@ export class Contest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    isVotingOpen(overrides?: CallOverrides): Promise<BigNumber>;
+
     name(overrides?: CallOverrides): Promise<BigNumber>;
+
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     ownerOf(
       tokenId: BigNumberish,
@@ -663,6 +800,10 @@ export class Contest extends BaseContract {
     ): Promise<BigNumber>;
 
     referenceBlock(overrides?: CallOverrides): Promise<BigNumber>;
+
+    renounceOwnership(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -685,10 +826,14 @@ export class Contest extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    setIsVotingOpen(
+      _isVotingOpen: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     spentVotePower(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     submitItem(
-      player: string,
       tokenURI: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -711,6 +856,11 @@ export class Contest extends BaseContract {
       from: string,
       to: string,
       tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    transferOwnership(
+      newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -744,12 +894,17 @@ export class Contest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    burnItem(
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    hasVoted(
+    hasSubmitted(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -760,7 +915,11 @@ export class Contest extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    isVotingOpen(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     ownerOf(
       tokenId: BigNumberish,
@@ -768,6 +927,10 @@ export class Contest extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     referenceBlock(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    renounceOwnership(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -790,13 +953,17 @@ export class Contest extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    setIsVotingOpen(
+      _isVotingOpen: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     spentVotePower(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     submitItem(
-      player: string,
       tokenURI: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -819,6 +986,11 @@ export class Contest extends BaseContract {
       from: string,
       to: string,
       tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    transferOwnership(
+      newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

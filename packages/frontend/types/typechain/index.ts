@@ -3,6 +3,7 @@
 /* eslint-disable */
 export type { AccessControl } from "./AccessControl";
 export type { IAccessControl } from "./IAccessControl";
+export type { Ownable } from "./Ownable";
 export type { IVotes } from "./IVotes";
 export type { ERC20 } from "./ERC20";
 export type { ERC20Permit } from "./ERC20Permit";
@@ -23,6 +24,7 @@ export type { JudgesToken } from "./JudgesToken";
 
 export { AccessControl__factory } from "./factories/AccessControl__factory";
 export { IAccessControl__factory } from "./factories/IAccessControl__factory";
+export { Ownable__factory } from "./factories/Ownable__factory";
 export { IVotes__factory } from "./factories/IVotes__factory";
 export { ERC20__factory } from "./factories/ERC20__factory";
 export { ERC20Permit__factory } from "./factories/ERC20Permit__factory";
