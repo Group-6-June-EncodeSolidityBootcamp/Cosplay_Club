@@ -18,7 +18,7 @@ async function main() {
   fs.unlinkSync(`${config.paths.artifacts}/contracts/contractAddress.ts`);
 
   // We get the contract to deploy
-  const YourContract = await ethers.getContractFactory('YourContract');
+  const YourContract = await ethers.getContractFactory('Contest');
   const contract = await YourContract.deploy('Hello, Hardhat!');
   await contract.deployed();
   saveFrontendFiles(contract, "YourContract");
