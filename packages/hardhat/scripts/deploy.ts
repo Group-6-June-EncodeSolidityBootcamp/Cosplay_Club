@@ -15,20 +15,41 @@ async function main() {
   // manually to make sure everything is compiled
   // await hre.run('compile');
 
-  fs.unlinkSync(`${config.paths.artifacts}/contracts/contractAddress.ts`);
+  if (fs.existsSync(`${config.paths.artifacts}/contracts/contractAddress.ts`)) {
+    fs.unlinkSync(`${config.paths.artifacts}/contracts/contractAddress.ts`);
+  }
 
-  // We get the contract to deploy
-  const YourContract = await ethers.getContractFactory('Contest');
-  const contract = await YourContract.deploy('Hello, Hardhat!');
-  await contract.deployed();
-  saveFrontendFiles(contract, "YourContract");
-  console.log('YourContract deployed to:', contract.address);
+  const [deployer] = await ethers.getSigners();
+  console.log(
+    "Deploying the contracts with the account:",
+    await deployer.getAddress()
+  );
 
-  const MulticallContract = await ethers.getContractFactory('Multicall');
-  const multicallContract = await MulticallContract.deploy();
-  await multicallContract.deployed();
-  saveFrontendFiles(multicallContract, "MulticallContract");
-  console.log('Multicall deployed to:', multicallContract.address);
+  // deploying token contract
+  console.log('1. Deploying token contract...');
+  const JudgesToken = await ethers.getContractFactory('JudgesToken');
+  const judgesToken = await JudgesToken.deploy();
+  await judgesToken.deployed();
+  saveFrontendFiles(judgesToken, "JudgesToken");
+  console.log('JudgesToken deployed to:', judgesToken.address);
+
+  // deploying DAO contract
+  console.log('2. Deploying DAO contract...');
+  const JudgesDAO = await ethers.getContractFactory('JudgesDAO');
+  const judgesDAO = await JudgesDAO.deploy(judgesToken.address);
+  await judgesDAO.deployed();
+  saveFrontendFiles(judgesDAO, "JudgesDAO");
+  console.log('JudgesDAO deployed to:', judgesDAO.address);
+
+  // deploying contest contract
+  console.log('3. Deploying Constest contract...');
+  const Contest = await ethers.getContractFactory('Contest');
+  const contest = await Contest.deploy(judgesToken.address);
+  await contest.deployed();
+  saveFrontendFiles(contest, "Contest");
+  console.log('Contest deployed to:', contest.address);
+
+
 }
 
 // https://github.com/nomiclabs/hardhat-hackathon-boilerplate/blob/master/scripts/deploy.js
