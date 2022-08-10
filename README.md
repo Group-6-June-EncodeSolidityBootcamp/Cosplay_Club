@@ -17,16 +17,16 @@ Cosplay Club is a cosplay contest app where users will submit their cosplay imag
 
 ## Project Structure
 
-- **Frontend I** - For Users (submissions, votes, top ...)
-- **Frontend II** - For DAO users (vote on a submission)
-- **Web Backend** (handle form submissions, uploading to ipfs)
-- **Contract I** - ERC721 for user submission (Image NFTs)
-- **Contract II** - For DAO, store votes
-- Other contracts for DAO (gov token, membership nft)
+- **Frontend I** - For Users (submissions, votes ...)
+- **Frontend II** - For DAO users (vote on decisions, proposals ...)
+- **Web Backend** (handle form submissions, uploading to ipfs ...)
+- **Contract I** - ERC721 + Tokenized Ballot for contests (Image NFTs)
+- **Contract II** - For the DAO (reusable)
+- **Contract III** - ERC20 Token for voting and governance (reusable)
 
 ## Demo
 
-🚀 link:
+🚀 link: [WIP]
 
 ## Getting Started
 
