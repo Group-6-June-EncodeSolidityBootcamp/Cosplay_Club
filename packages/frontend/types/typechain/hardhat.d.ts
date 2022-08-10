@@ -33,6 +33,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IGovernorCompatibilityBravo__factory>;
     getContractFactory(
+      name: "GovernorCountingSimple",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.GovernorCountingSimple__factory>;
+    getContractFactory(
+      name: "GovernorSettings",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.GovernorSettings__factory>;
+    getContractFactory(
       name: "GovernorTimelockControl",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.GovernorTimelockControl__factory>;
@@ -166,6 +174,16 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IGovernorCompatibilityBravo>;
+    getContractAt(
+      name: "GovernorCountingSimple",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.GovernorCountingSimple>;
+    getContractAt(
+      name: "GovernorSettings",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.GovernorSettings>;
     getContractAt(
       name: "GovernorTimelockControl",
       address: string,
