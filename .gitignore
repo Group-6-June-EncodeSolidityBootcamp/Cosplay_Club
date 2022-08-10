@@ -4,6 +4,7 @@
 **/node_modules
 /.pnp
 .pnp.js
+packages/frontend/types
 
 # misc
 .DS_Store
