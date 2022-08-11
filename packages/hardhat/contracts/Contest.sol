@@ -53,8 +53,10 @@ contract Contest is ERC721URIStorage, Ownable {
         public
         returns (uint256)
     {   
-        // limit submissions even if the token has transferred
-        require(hasSubmitted[msg.sender] == false, "Only one submission allowed");
+        // limit submissions to 1 even if the submission was transferred
+        // here we allow the owner unlimited submissions
+        require(hasSubmitted[msg.sender] == false || msg.sender == owner(),
+            "Only one submission allowed");
         uint256 newItemId = _tokenIds.current();
         _mint(msg.sender, newItemId);
         _setTokenURI(newItemId, tokenURI);

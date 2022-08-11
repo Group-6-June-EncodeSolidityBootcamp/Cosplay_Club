@@ -37,6 +37,7 @@ interface JudgesTokenInterface extends ethers.utils.Interface {
     "getPastVotes(address,uint256)": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "getVotes(address)": FunctionFragment;
+    "grantAccess(address)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
@@ -45,8 +46,8 @@ interface JudgesTokenInterface extends ethers.utils.Interface {
     "nonces(address)": FunctionFragment;
     "numCheckpoints(address)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "quickTransferAccess(address)": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
+    "revokeAccess()": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -111,6 +112,7 @@ interface JudgesTokenInterface extends ethers.utils.Interface {
     values: [BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "getVotes", values: [string]): string;
+  encodeFunctionData(functionFragment: "grantAccess", values: [string]): string;
   encodeFunctionData(
     functionFragment: "grantRole",
     values: [BytesLike, string]
@@ -146,12 +148,12 @@ interface JudgesTokenInterface extends ethers.utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "quickTransferAccess",
-    values: [string]
-  ): string;
-  encodeFunctionData(
     functionFragment: "renounceRole",
     values: [BytesLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeAccess",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "revokeRole",
@@ -218,6 +220,10 @@ interface JudgesTokenInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "getVotes", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "grantAccess",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
   decodeFunctionResult(
@@ -233,11 +239,11 @@ interface JudgesTokenInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "quickTransferAccess",
+    functionFragment: "renounceRole",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "renounceRole",
+    functionFragment: "revokeAccess",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
@@ -429,6 +435,11 @@ export class JudgesToken extends BaseContract {
 
     getVotes(account: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    grantAccess(
+      to: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     grantRole(
       role: BytesLike,
       account: string,
@@ -473,14 +484,13 @@ export class JudgesToken extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    quickTransferAccess(
-      to: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     renounceRole(
       role: BytesLike,
       account: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    revokeAccess(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -579,6 +589,11 @@ export class JudgesToken extends BaseContract {
 
   getVotes(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+  grantAccess(
+    to: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   grantRole(
     role: BytesLike,
     account: string,
@@ -620,14 +635,13 @@ export class JudgesToken extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  quickTransferAccess(
-    to: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   renounceRole(
     role: BytesLike,
     account: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  revokeAccess(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -723,6 +737,8 @@ export class JudgesToken extends BaseContract {
 
     getVotes(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    grantAccess(to: string, overrides?: CallOverrides): Promise<void>;
+
     grantRole(
       role: BytesLike,
       account: string,
@@ -764,13 +780,13 @@ export class JudgesToken extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    quickTransferAccess(to: string, overrides?: CallOverrides): Promise<void>;
-
     renounceRole(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    revokeAccess(overrides?: CallOverrides): Promise<void>;
 
     revokeRole(
       role: BytesLike,
@@ -999,6 +1015,11 @@ export class JudgesToken extends BaseContract {
 
     getVotes(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    grantAccess(
+      to: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     grantRole(
       role: BytesLike,
       account: string,
@@ -1043,14 +1064,13 @@ export class JudgesToken extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    quickTransferAccess(
-      to: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     renounceRole(
       role: BytesLike,
       account: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    revokeAccess(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1164,6 +1184,11 @@ export class JudgesToken extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    grantAccess(
+      to: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     grantRole(
       role: BytesLike,
       account: string,
@@ -1211,14 +1236,13 @@ export class JudgesToken extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    quickTransferAccess(
-      to: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     renounceRole(
       role: BytesLike,
       account: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    revokeAccess(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
