@@ -38,7 +38,13 @@ Cosplay Club is a cosplay contest app where users will submit their cosplay imag
 
 ## Demo
 
-🚀 link: [WIP]
+🚀 link: [starwars-cosplayclub.netlify.app](https://starwars-cosplayclub.netlify.app/)
+
+## Moving Forward
+
+- Frontend for DAO
+- Web tool to generate contest instances
+- Unstoppable Domains Login & Humanity Check
 
 ## Getting Started
 
