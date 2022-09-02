@@ -236,9 +236,11 @@ function App() {
               <div className="row mb-5" data-aos="fade">
                   <div className="col-md-8 col-xl-6 text-center mx-auto">
                       <p className="fw-bold text-success mb-2">SUBMIT ENTRY //</p>
-                      <h2 className="fw-bold">Upload Your Submission</h2>
+                      {/* <h2 className="fw-bold">Upload Your Submission</h2> */}
+                      <h2 className="fw-bold">Submissions Closed!</h2>
                   </div>
               </div>
+                        {/*
               <div className="row d-flex justify-content-center" data-aos="fade">
                   <div className="col-md-6 col-xl-4">
                       <div>
@@ -283,6 +285,8 @@ function App() {
                       </div>
                   </div>
               </div>
+                        */}
+
           </div>
       </section>
       <section className="py-5">
