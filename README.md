@@ -12,6 +12,12 @@ Cosplay Club conducts cosplay contests where users can submit their cosplay imag
 - ✨Magic ✨
 
 
+## Demo (on goerli)
+
+🚀 link: [starwars-cosplayclub.netlify.app](https://starwars-cosplayclub.netlify.app/)
+
+
+
 ## Why?
 
 - To demostrate how to successfully run a virtual contest on blockchain.
@@ -38,10 +44,6 @@ Solidity [packages/hardhat/contracts/JudgesDAO.sol]
 - **Contract III** - ERC20 Token for voting and governance (reusable)
 Solidity [packages/hardhat/contracts/JudgesToken.sol]
 
-
-## Demo (on goerli)
-
-🚀 link: [starwars-cosplayclub.netlify.app](https://starwars-cosplayclub.netlify.app/)
 
 ## Moving Forward
 
