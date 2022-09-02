@@ -2,10 +2,13 @@
 
 ![Cosplay Club](https://i.imgur.com/8A3UU3J.jpg)
 
-Cosplay Club is a cosplay contest app where users will submit their cosplay image on the theme/topic. Judges can use our JuDAO to vote for the winner.
+Cosplay Club conducts cosplay contests where users can submit their cosplay image on the theme/topic. Judges can use our ERC20 tokens to vote for the winner. A DAO is set up for admin actions like burning an inappropriate submission, closing the voting, etc.
 
 - Submissions & Votes will be displayed on the frontend.
+- Submissions are NFT.
+- Erc20 token for voting.
 - The winner will receive a special NFT Prize & Tokens.🏆💵🤑
+- DAO with owner role for admin actions.
 - ✨Magic ✨
 
 
@@ -18,30 +21,31 @@ Cosplay Club is a cosplay contest app where users will submit their cosplay imag
 ## Project Structure
 
 - **Frontend I** - For Users (submissions, votes ...)
-[packages/frontend]
+React [packages/frontend]
 
 - **Frontend II** - For DAO users (vote on decisions, proposals ...) 
 [WIP]
 
 - **Web Backend** (handle form submissions, uploading to ipfs ...)
-[packages/backend]
+Express [packages/backend]
 
 - **Contract I** - ERC721 + Tokenized Ballot for contests (Image NFTs)
-[packages/hardhat/contracts/Contest.sol]
+Solidity [packages/hardhat/contracts/Contest.sol]
 
 - **Contract II** - For the Governance (reusable)
-[packages/hardhat/contracts/JudgesDAO.sol]
+Solidity [packages/hardhat/contracts/JudgesDAO.sol]
 
 - **Contract III** - ERC20 Token for voting and governance (reusable)
-[packages/hardhat/contracts/JudgesToken.sol]
+Solidity [packages/hardhat/contracts/JudgesToken.sol]
 
 
-## Demo
+## Demo (on goerli)
 
 🚀 link: [starwars-cosplayclub.netlify.app](https://starwars-cosplayclub.netlify.app/)
 
 ## Moving Forward
 
+- Finish submission functions.
 - Frontend for DAO
 - Web tool to generate contest instances
 - Unstoppable Domains Login & Humanity Check
