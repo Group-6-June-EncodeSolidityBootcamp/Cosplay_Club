@@ -58,30 +58,19 @@ Solidity [packages/world-id-hardhat/contracts/Contract.sol]
 
 ## Getting Started
 
-This project uses Yarn Workspaces, so you'll need [Yarn](https://classic.yarnpkg.com/en/docs/install)
+Explore the packages folder. Set up your .env files.
+
+To deploy contracts:
 
 ```bash
-git clone https://github.com/ChangoMan/nextjs-ethereum-starter.git
-cd nextjs-ethereum-starter
+cd packages/hardhat
+npm install
+npx hardhat run scripts/deploy.ts --network mumbai```
 
-yarn install
-
-# Start up the Hardhat Network
-yarn chain
-```
-
-Here we just install the npm project's dependencies, and by running `yarn chain` we spin up an instance of Hardhat Network that you can connect to using MetaMask. In a different terminal in the same directory, run:
-
+For frontends:
+(Make sure your contract addresses and ABIs are in place.)
 ```bash
-yarn deploy
-```
+cd packages/frontend
+npm install
+npm start```
 
-This will deploy the contract to Hardhat Network. After this completes run:
-
-```bash
-yarn dev
-```
-
-This will start up the Next.js development server and your site will be available at http://localhost:3000/
-
-To interact with the local contract, be sure to switch your MetaMask Network to `Localhost 8545`
