@@ -65,12 +65,14 @@ To deploy contracts:
 ```bash
 cd packages/hardhat
 npm install
-npx hardhat run scripts/deploy.ts --network mumbai```
+npx hardhat run scripts/deploy.ts --network mumbai
+```
 
 For frontends:
 (Make sure your contract addresses and ABIs are in place.)
 ```bash
 cd packages/frontend
 npm install
-npm start```
+npm start
+```
 
