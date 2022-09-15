@@ -6,13 +6,15 @@ Cosplay Club conducts cosplay contests where users can submit their cosplay imag
 
 - Submissions & Votes will be displayed on the frontend.
 - Submissions are NFT.
-- Erc20 token for voting.
+- Anybody can vote! But only one per human.
 - The winner will receive a special NFT Prize & Tokens.🏆💵🤑
 - DAO with owner role for admin actions.
 - ✨Magic ✨
 
+**v0.2 changes:**
+- We're using **WORLD ID**; Voting is now more democratic, Anyone can vote! but you'll have to verify with WORLD ID to prove that you are human and are voting only once. No cheating 👮‍♀️.
 
-## Demo (on goerli)
+## Live Demo (on goerli)
 
 🚀 link: [starwars-cosplayclub.netlify.app](https://starwars-cosplayclub.netlify.app/)
 
@@ -21,7 +23,7 @@ Cosplay Club conducts cosplay contests where users can submit their cosplay imag
 ## Why?
 
 - To demostrate how to successfully run a virtual contest on blockchain.
-- Make contest judging decentralised with a DAO.
+- Make contest judging truly democratic and decentralised.
 - An easy dapp for general public to get a feel of web3.
 
 ## Project Structure
@@ -41,8 +43,11 @@ Solidity [packages/hardhat/contracts/Contest.sol]
 - **Contract II** - For the Governance (reusable)
 Solidity [packages/hardhat/contracts/JudgesDAO.sol]
 
-- **Contract III** - ERC20 Token for voting and governance (reusable)
+- **Contract III** - ERC20 Token for governance (reusable)
 Solidity [packages/hardhat/contracts/JudgesToken.sol]
+
+- **World ID Contract III** - For verifying personhood (reusable)
+Solidity [packages/world-id-hardhat/contracts/Contract.sol]
 
 
 ## Moving Forward
@@ -50,7 +55,6 @@ Solidity [packages/hardhat/contracts/JudgesToken.sol]
 - Finish submission functions.
 - Frontend for DAO
 - Web tool to generate contest instances
-- Unstoppable Domains Login & Humanity Check
 
 ## Getting Started
 

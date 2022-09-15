@@ -42,9 +42,9 @@ async function main() {
   console.log('JudgesDAO deployed to:', judgesDAO.address);
 
   // deploying contest contract
-  console.log('3. Deploying Constest contract...');
+  console.log('3. Deploying Contest contract...');
   const Contest = await ethers.getContractFactory('Contest');
-  const contest = await Contest.deploy(judgesToken.address);
+  const contest = await Contest.deploy();
   await contest.deployed();
   saveFrontendFiles(contest, "Contest");
   console.log('Contest deployed to:', contest.address);

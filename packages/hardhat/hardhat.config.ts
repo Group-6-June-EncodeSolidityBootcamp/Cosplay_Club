@@ -46,6 +46,10 @@ const config: HardhatUserConfig = {
     artifacts: '../frontend/artifacts',
   },
   networks: {
+    mumbai: {
+      url: process.env.MUMBAI_URL || '',
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+  },
     goerli: {
       url: `https://eth-goerli.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
       accounts: [GOERLI_PRIVATE_KEY]

@@ -5,18 +5,15 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-interface IERC20Votes {
-    function getPastVotes(address, uint256) external view returns (uint256);
-}
 
 contract Contest is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
+//
     event Voted(
         address indexed voter,
         uint256 indexed tokenId,
-        uint256 weight,
         uint256 tokenIdVotes
     );
 
@@ -24,18 +21,21 @@ contract Contest is ERC721URIStorage, Ownable {
     mapping(uint256 => uint256) public voteCount;
 
     mapping(address => bool) public hasSubmitted;
-    mapping(address => uint256) public spentVotePower;
+    
+    mapping(address => bool) public hasVoted;
 
-    IERC20Votes public voteToken;
-    uint256 public referenceBlock;
+    address worldIdContract;
     bool public isSubmissionOpen;
     bool public isVotingOpen;
 
-    constructor(address _voteToken) ERC721("ContestSubmission", "COS") {
-        voteToken = IERC20Votes(_voteToken);
-        referenceBlock = block.number;
+    constructor() ERC721("ContestSubmission", "COS") {
         isSubmissionOpen = true;
         isVotingOpen = true;
+    }
+
+    modifier isSenderWordIdContract () {
+        require(msg.sender == worldIdContract, "You are not Authorised");
+        _;
     }
 
     modifier submissionOpen () {
@@ -76,12 +76,11 @@ contract Contest is ERC721URIStorage, Ownable {
     }
 
 
-    function vote(uint256 tokenId, uint256 amount) external votingOpen {
-        uint256 votingPowerAvailable = votingPower();
-        require(votingPowerAvailable >= amount, "Has not enough voting power");
-        spentVotePower[msg.sender] += amount;
-        voteCount[tokenId] += amount;
-        emit Voted(msg.sender, tokenId, amount, voteCount[tokenId]);
+    function vote(uint256 tokenId, address voter) external votingOpen isSenderWordIdContract {
+        require(hasSubmitted[msg.sender] == false, "You've already voted before");
+        hasSubmitted[voter] = true;
+        voteCount[tokenId] += 1;
+        emit Voted(voter, tokenId, voteCount[tokenId]);
     }
 
     function winningSubmission() public view returns (uint256 winningSubmission_) {
@@ -95,12 +94,6 @@ contract Contest is ERC721URIStorage, Ownable {
         return winningSubmission_;
     }
 
-    function votingPower() public view returns (uint256 votingPower_) {
-        votingPower_ =
-            voteToken.getPastVotes(msg.sender, referenceBlock) -
-            spentVotePower[msg.sender];
-    }
-
     function setIsSubmissionOpen(bool _isSubmissionOpen) public onlyOwner {
         require(_isSubmissionOpen != isSubmissionOpen, "No changes to make");
         isSubmissionOpen = _isSubmissionOpen;
@@ -109,5 +102,9 @@ contract Contest is ERC721URIStorage, Ownable {
     function setIsVotingOpen(bool _isVotingOpen) public onlyOwner {
         require(_isVotingOpen != isVotingOpen, "No changes to make");
         isVotingOpen = _isVotingOpen;
+    }
+
+    function setWorldIdContract (address _worldIdContract) public onlyOwner {
+        worldIdContract = _worldIdContract;
     }
 }
