@@ -14,7 +14,7 @@ Cosplay Club conducts cosplay contests where users can submit their cosplay imag
 **v0.2 changes:**
 - We're using **WORLD ID**; Voting is now more democratic, Anyone can vote! but you'll have to verify with WORLD ID to prove that you are human and are voting only once. Adding sybil-resistance and uniqueness features to our dApp. No cheating 👮‍♀️.
 
-## Live Demo (on goerli)
+## Live Demo (on polygon mumbai)
 
 🚀 link: [starwars-cosplayclub.netlify.app](https://starwars-cosplayclub.netlify.app/)
 
@@ -65,7 +65,7 @@ To deploy contracts:
 ```bash
 cd packages/hardhat
 npm install
-npx hardhat run scripts/deploy.ts --network goerli
+npx hardhat run scripts/deploy.ts --network mumbai
 ```
 
 For frontends:
@@ -81,5 +81,5 @@ To set the world id contract address to the contest contract:
 - Then, deploy the world id contract, copy the address and set it to the WORLDID_CONTRACT_ADDRESS in `hardhat/scripts/set-worldid.ts` and then run:
 ```bash
 cd packages/hardhat
-npx hardhat run scripts/set-worldid.ts --network goerli  
+npx hardhat run scripts/set-worldid.ts --network mumbai  
 ```
