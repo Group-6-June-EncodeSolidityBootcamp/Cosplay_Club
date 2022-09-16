@@ -1,14 +1,14 @@
 import logo from "./logo.svg";
-import "./VotingPage.css";
+import "./WorldID.css";
 import { WorldIDWidget } from "@worldcoin/id";
 
 const widgetProps = {
-  actionId: "wid_staging_PCNQeDC5CX",
+  actionId: "wid_staging_7919c463dab9a1b7ba9d4e836d4a6018",
   signal: "user-id-1",
   enableTelemetry: true,
   appName: "cosplayClub",
   signalDescription: "Proof of Personhood",
-  theme: "dark",
+  theme: "light",
   debug: true, // DO NOT SET TO `true` IN PRODUCTION
   onSuccess: (result) => console.log(result),
   onError: ({ code, detail }) => console.log({ code, detail }),
@@ -16,11 +16,11 @@ const widgetProps = {
   onInitError: (error) => console.log("Error while initialization World ID", error),
 };
 
-export function VotingPage() {
+export function WorldID() {
   return (
-    <div className="votingPage">
-      <header className="votingPage-header">
-        <img src={logo} className="votingPage-logo" alt="logo" />
+    <div className="worldIDPage">
+      <header className="worldIDPage-header">
+        <img src={logo} className="worldIDPage-logo" alt="logo" />
         <p>World ID</p>
         {/* World ID component below */}
         <WorldIDWidget {...widgetProps} />

@@ -1,19 +1,19 @@
-.votingPage {
+.worldIDPage {
 	text-align: center;
   }
 
-  .votingPage-logo {
+  .worldIDPage-logo {
 	height: 40vmin;
 	pointer-events: none;
   }
 
   @media (prefers-reduced-motion: no-preference) {
-	.votingPage-logo {
-	  animation: votingPage-logo-spin infinite 20s linear;
+	.worldIDPage-logo {
+	  animation: worldIDPage-logo-spin infinite 20s linear;
 	}
   }
 
-  .votingPage-header {
+  .worldIDPage-header {
 	background-color: #282c34;
 	min-height: 100vh;
 	display: flex;
@@ -24,11 +24,11 @@
 	color: white;
   }
 
-  .votingPage-link {
+  .worldIDPage-link {
 	color: #61dafb;
   }
 
-  @keyframes votingPage-logo-spin {
+  @keyframes worldIDPage-logo-spin {
 	from {
 	  transform: rotate(0deg);
 	}
