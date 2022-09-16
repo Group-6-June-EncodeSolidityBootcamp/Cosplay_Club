@@ -16,7 +16,7 @@ async function main() {
   const contract = await Contract.attach(address);
 
   console.log("Contract address:", contract.address);
-  console.log("Setting WORLD ID Contract address:", contract.address);
+  console.log("Setting WORLD ID Contract address:", WORLDID_CONTRACT_ADDRESS);
 
   // Send transaction to set world id contract
     const tx = await contract.setWorldIdContract(WORLDID_CONTRACT_ADDRESS);

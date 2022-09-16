@@ -1,6 +1,6 @@
 import { ethers } from "hardhat";
 
-const CONTRACT_ADDRESS = "0xa05AD8C8FA9252626bcA667107E4e8eA6581bff0";
+const CONTRACT_ADDRESS = "0x49E483Edc1f094A239a85396F9f99E08f5223c7C";
 const TO_MINT_TOKEN_URI = "https://starwars-cosplayclub.glitch.me/nft/token";
 
 async function main() {
