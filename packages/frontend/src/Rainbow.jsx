@@ -9,6 +9,7 @@ export const Rainbow = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        zIndex: 1000,
       }}
     >
       <ConnectButton />
