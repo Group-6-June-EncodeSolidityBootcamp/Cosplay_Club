@@ -76,3 +76,10 @@ npm install
 npm start
 ```
 
+To set the world id contract address to the contest contract:
+- first deploy contest contract, copy the contract address and set it to CONTRACT ADDRESS on scripts in the scripts folder both in hardhat and worldid-hardhat folders.
+- Then, deploy the world id contract, copy the address and set it to the WORLDID_CONTRACT_ADDRESS in `hardhat/scripts/set-worldid.ts` and then run:
+```bash
+cd packages/hardhat
+npx hardhat run scripts/set-worldid.ts --network mumbai  
+```
