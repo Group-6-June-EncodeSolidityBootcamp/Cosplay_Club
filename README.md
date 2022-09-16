@@ -12,7 +12,7 @@ Cosplay Club conducts cosplay contests where users can submit their cosplay imag
 - ✨Magic ✨
 
 **v0.2 changes:**
-- We're using **WORLD ID**; Voting is now more democratic, Anyone can vote! but you'll have to verify with WORLD ID to prove that you are human and are voting only once. No cheating 👮‍♀️.
+- We're using **WORLD ID**; Voting is now more democratic, Anyone can vote! but you'll have to verify with WORLD ID to prove that you are human and are voting only once. Adding sybil-resistance and uniqueness features to our dApp. No cheating 👮‍♀️.
 
 ## Live Demo (on goerli)
 
