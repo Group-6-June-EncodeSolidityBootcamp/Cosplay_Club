@@ -65,7 +65,7 @@ To deploy contracts:
 ```bash
 cd packages/hardhat
 npm install
-npx hardhat run scripts/deploy.ts --network mumbai
+npx hardhat run scripts/deploy.ts --network goerli
 ```
 
 For frontends:
@@ -81,5 +81,5 @@ To set the world id contract address to the contest contract:
 - Then, deploy the world id contract, copy the address and set it to the WORLDID_CONTRACT_ADDRESS in `hardhat/scripts/set-worldid.ts` and then run:
 ```bash
 cd packages/hardhat
-npx hardhat run scripts/set-worldid.ts --network mumbai  
+npx hardhat run scripts/set-worldid.ts --network goerli  
 ```
