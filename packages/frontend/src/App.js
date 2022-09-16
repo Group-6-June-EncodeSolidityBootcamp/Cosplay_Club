@@ -98,16 +98,16 @@ function App() {
               <div className="py-5 p-lg-5">
                   <div className="text-center" id="loading-div"><img src="assets/img/r2.gif" STYLE="height: 100px;"
 
-                 
+
                     hidden={status == ""}/>
                       <p id="loading-text" STYLE="margin: 16px;">{status}</p>
                   </div>
 
-                  
+
                   <div data-aos="fade" id="nfts-div" hidden={status != ""}>
                       <div className="row row-cols-3 row-cols-md-2 mx-auto" STYLE="max-width: 900px;">
-                        
-                        
+
+
                         {NFTs.map((nft, index) => (
                           <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4 mb-5">
                               <div className="card shadow-sm glow" STYLE="background: #000;">
@@ -120,9 +120,9 @@ function App() {
                               </div>
                           </div>
                         ))}
-                        
+
                       </div>
-                      
+
                       <Link to="/seeAllSubmissions" className="btn btn-primary d-block m-auto" type="button">See All Submissions&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" className="bi bi-arrow-right">
                               <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
                           </svg></Link>
