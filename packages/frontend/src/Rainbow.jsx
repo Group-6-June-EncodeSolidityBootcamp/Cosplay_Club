@@ -1,4 +1,5 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { FixedNumber } from "ethers";
 
 export const Rainbow = () => {
   return (
@@ -9,7 +10,8 @@ export const Rainbow = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        zIndex: 1000,
+        marginTop: "60px",
+        marginBottom: "-120px"
       }}
     >
       <ConnectButton />
