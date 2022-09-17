@@ -37,7 +37,7 @@ React [packages/frontend]
 - **Web Backend** (handle form submissions, uploading to ipfs ...)
 Express [packages/backend]
 
-- **Contract I** - ERC721 + Tokenized Ballot for contests (Image NFTs)
+- **Contract I** - ERC721 + Ballot for contests (Image NFTs)
 Solidity [packages/hardhat/contracts/Contest.sol]
 
 - **Contract II** - For the Governance (reusable)
@@ -46,15 +46,16 @@ Solidity [packages/hardhat/contracts/JudgesDAO.sol]
 - **Contract III** - ERC20 Token for governance (reusable)
 Solidity [packages/hardhat/contracts/JudgesToken.sol]
 
-- **World ID Contract III** - For verifying personhood (reusable)
+- **World ID Contract III** - For verifying personhood and executing vote
 Solidity [packages/world-id-hardhat/contracts/Contract.sol]
 
 
 ## Moving Forward
 
-- Finish submission functions.
-- Frontend for DAO
-- Web tool to generate contest instances
+- Complete incomplete works.
+- Migrate to Nextjs
+- Build a Frontend for DAO.
+- Build a Web tool to generate contest instances.
 
 ## Getting Started
 
