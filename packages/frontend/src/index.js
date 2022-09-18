@@ -15,7 +15,7 @@ import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { Rainbow } from "./Rainbow";
-import {WorldID} from "./WorldID";
+import {Verification} from "./WorldID";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -54,7 +54,7 @@ root.render(
     </WagmiConfig>
 
   <Routes>
-    <Route path="/worldID" element={<WorldID />} />
+    <Route path="/worldID" element={<Verification />} />
     <Route path="/" element={<App />} />
     <Route path="/seeAllSubmissions" element={<SeeAllSubmissions />} />
   </Routes>
