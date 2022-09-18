@@ -30,12 +30,11 @@ export  const Verification = () => {
       let merkle_root = verificationResponse.merkle_root;
       let nullifier_hash = verificationResponse.nullifier_hash;
       let proof = verificationResponse.nullifier_hash;
-      await worldCoin.verifyAndExecute(account,merkle_root,nullifier_hash,proof,7); //replace 7 with token id.
 
       await worldCoin.on('Verify',(response)=>{
         setVerify(response)
       })
-      await worldid.verifyYourAccount();
+      await worldCoin.verifyAndExecute(account,merkle_root,nullifier_hash,proof,7); //replace 7 with token id.
     }
   }
   return(<div>
