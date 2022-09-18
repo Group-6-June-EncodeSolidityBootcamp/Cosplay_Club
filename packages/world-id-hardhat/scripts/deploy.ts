@@ -2,7 +2,7 @@ import { ethers } from 'hardhat';
 import fetch from "node-fetch";
 
 // Our main contest contract whose vote function we call
-const CONTEST_CONTRACT = "0x49E483Edc1f094A239a85396F9f99E08f5223c7C";
+const CONTEST_CONTRACT = "0x77BEcbBbd929c10de37573b109048a3Eb2154c50";
 
 async function main() {
     

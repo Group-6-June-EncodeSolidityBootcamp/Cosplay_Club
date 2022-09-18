@@ -1,10 +1,9 @@
 import "./WorldID.css";
 import { WorldIDWidget } from "@worldcoin/id";
 import { useState } from "react";
-import contractABI from "./assets/worldIDABI";
+import WorldCoinContractABI from "./assets/worldIDABI";
 import { ethers } from "ethers";
-const CONTRACT_ADDRESS = "0x49E483Edc1f094A239a85396F9f99E08f5223c7C";
-const WorldCoinAddress = "0xa05AD8C8FA9252626bcA667107E4e8eA6581bff0";
+const WorldCoinAddress = "0x4311d6b0c0973317F47dDCB5aA34Ea6058dbC3a8";
 
 export const getAccount = async () => {
   await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -13,19 +12,11 @@ export const getAccount = async () => {
   return account;
 };
 
-export const connectContract = async () => {
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-
-     const contract = new ethers.Contract(CONTRACT_ADDRESS, contestABI, signer);
-     return contract;
-};
-
 export const connectWorldCoin = async() =>{
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
 
-  const contract = new ethers.Contract(WorldCoinAddress, contractABI, signer);
+  const contract = new ethers.Contract(WorldCoinAddress, WorldCoinContractABI, signer);
   return contract;
 }
 
@@ -33,14 +24,13 @@ export  const Verification = () => {
   const[verify,setVerify] = useState(false)
   const verfiyUser=async(verificationResponse)=>{
     console.log(verificationResponse);
-    let worldid = await connectContract()
     if(verificationResponse){
       let account = await getAccount()
       let worldCoin = await connectWorldCoin();
       let merkle_root = verificationResponse.merkle_root;
       let nullifier_hash = verificationResponse.nullifier_hash;
       let proof = verificationResponse.nullifier_hash;
-      await worldCoin.verifyAndExecute(account,merkle_root,nullifier_hash,proof);
+      await worldCoin.verifyAndExecute(account,merkle_root,nullifier_hash,proof,7); //replace 7 with token id.
 
       await worldCoin.on('Verify',(response)=>{
         setVerify(response)

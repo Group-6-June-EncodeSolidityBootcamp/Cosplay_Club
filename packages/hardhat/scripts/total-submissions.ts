@@ -1,6 +1,6 @@
 import { ethers } from "hardhat";
 
-const CONTRACT_ADDRESS = "0x49E483Edc1f094A239a85396F9f99E08f5223c7C";
+const CONTRACT_ADDRESS = "0x77BEcbBbd929c10de37573b109048a3Eb2154c50";
 
 async function main() {
 
