@@ -77,8 +77,8 @@ contract Contest is ERC721URIStorage, Ownable {
 
 
     function vote(uint256 tokenId, address voter) external votingOpen isSenderWordIdContract {
-        require(hasSubmitted[msg.sender] == false, "You've already voted before");
-        hasSubmitted[voter] = true;
+        require(hasVoted[voter] == false, "You've already voted before");
+        hasVoted[voter] = true;
         voteCount[tokenId] += 1;
         emit Voted(voter, tokenId, voteCount[tokenId]);
     }
