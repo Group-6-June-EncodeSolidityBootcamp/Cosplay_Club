@@ -13,7 +13,7 @@ export const getAccount = async () => {
 };
 
 export const connectWorldCoin = async() =>{
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const provider = new ethers.providers.AlchemyProvider("maticmum", "kOxMlUZntCmiWXNOLXC6JncY_QkcVioa");
   const signer = provider.getSigner();
 
   const contract = new ethers.Contract(WorldCoinAddress, WorldCoinContractABI, signer);
